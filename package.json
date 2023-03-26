@@ -1,7 +1,7 @@
 {
   "name": "ntfc",
   "version": "1.0.0",
-  "description": "Send api requests messages to telegram bot",
+  "description": "Send API requests messages to telegram bot",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
