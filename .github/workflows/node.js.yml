@@ -1,0 +1,31 @@
+name: Deploy NTFC app
+
+on:
+  push:
+    branches: [ main ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.7
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          GIT_SSH_COMMAND: 'ssh -Tv'
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            cd ntfc
+            git pull origin main
+            npm run build
+            pm2 restart ntfc-app
