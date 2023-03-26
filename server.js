@@ -32,6 +32,14 @@ app.post('/api/send-message', async (req, res) => {
   }
 });
 
+app.post('/api/test', async (req, res) => {
+    try {
+      res.sendStatus(200);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to test Telegram bot' });
+    }
+  });
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
